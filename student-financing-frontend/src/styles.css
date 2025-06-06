@@ -1,0 +1,13 @@
+/* importa todos os utilitários do Tailwind v4 */
+@import "tailwindcss";
+
+/* mapa suas cores em CSS custom properties */
+@layer base {
+  :root {
+    --c-primary:  #003D49;
+    --c-secondary:#00D1B4;
+    --c-bg:       #DDF6F5;
+    --c-surface:  #FFFFFF;
+    --c-text:     #012E38;
+  }
+}
