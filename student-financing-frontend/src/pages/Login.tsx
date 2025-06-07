@@ -1,8 +1,10 @@
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-
-type FormValues = { email: string; senha: string };
+import { zodResolver } from '@hookform/resolvers/zod';
+import Input from '../ui/Input';
+import { PrimaryButton } from '../ui/PrimaryButton';
+import { loginSchema, type LoginFormData } from '../schemas/auth';
 
 export default function Login() {
     const { login } = useAuth();
@@ -10,14 +12,17 @@ export default function Login() {
     const {
         register,
         handleSubmit,
-        formState: { isSubmitting },
-    } = useForm<FormValues>();
+        formState: { isSubmitting, errors },
+    } = useForm<LoginFormData>({
+        resolver: zodResolver(loginSchema),
+        mode: 'onBlur',
+    });
 
-    const onSubmit = async (data: FormValues) => {
+    const onSubmit = async (data: LoginFormData) => {
         try {
             await login(data.email, data.senha);
             navigate('/home');
-        } catch {
+        } catch (error) {
             alert('Credenciais inválidas');
         }
     };
@@ -30,38 +35,30 @@ export default function Login() {
                 </h1>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                    {/* Email */}
-                    <div>
-                        <label className="block text-sm font-medium text-text mb-1">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-secondary"
-                            placeholder="seu@email.com"
-                            {...register('email', { required: true })}
-                        />
-                    </div>
+                    <Input
+                        label="Email"
+                        type="email"
+                        placeholder="seu@email.com"
+                        register={register('email')}
+                        error={errors.email?.message}
+                    />
 
-                    {/* Senha */}
-                    <div>
-                        <label className="block text-sm font-medium text-text mb-1">
-                            Senha
-                        </label>
-                        <input
-                            type="password"
-                            className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-secondary"
-                            placeholder="••••••••"
-                            {...register('senha', { required: true })}
-                        />
-                    </div>
+                    <Input
+                        label="Senha"
+                        type="password"
+                        placeholder="••••••••"
+                        register={register('senha')}
+                        error={errors.senha?.message}
+                    />
 
-                    <button
-                        disabled={isSubmitting}
-                        className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-2 rounded-lg disabled:opacity-40 transition-colors"
+                    <PrimaryButton
+                        type="submit"
+                        isLoading={isSubmitting}
+                        loadingText="Entrando..."
+                        className="w-full"
                     >
                         Entrar
-                    </button>
+                    </PrimaryButton>
                 </form>
 
                 <p className="mt-6 text-center text-sm">
