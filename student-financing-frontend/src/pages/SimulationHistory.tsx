@@ -94,7 +94,7 @@ export default function SimulationHistory() {
                         endDate={range[1]}
                         onChange={(update: [Date | null, Date | null]) => setRange(update)}
                         isClearable
-                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        className="w-full px-4 py-2 rounded-[5px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20"
                         dateFormat="dd/MM/yyyy"
                         placeholderText="Selecione um período"
                     />
