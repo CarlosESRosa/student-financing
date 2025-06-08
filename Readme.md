@@ -4,10 +4,11 @@ Este é um projeto full-stack que conecta estudantes de medicina a financiamento
 
 ## 🎥 Demonstração
 
-![Fluxo da aplicação](./video.gif)
-
 > Se quiser ver em alta resolução,  
 > baixe o arquivo [video.mkv ↗](https://github.com/CarlosESRosa/student-financing/raw/main/video.mkv).
+
+![Fluxo da aplicação](./video.gif)
+
 
 ## 🚀 Tecnologias Utilizadas
 
