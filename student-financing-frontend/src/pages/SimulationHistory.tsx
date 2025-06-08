@@ -86,10 +86,10 @@ export default function SimulationHistory() {
             <h1 className="text-2xl font-semibold">Histórico de simulações</h1>
 
             {/* -------- filtros -------- */}
-            <div className="bg-surface rounded-xl p-4 flex flex-wrap gap-4 items-end shadow">
+            <div className="bg-surface rounded-xl p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 items-center shadow">
                 {/* Date range */}
                 <div className="flex flex-col">
-                    <label className="text-xs text-gray-600">Período</label>
+                    <label className="block text-sm font-medium text-gray-700">Período</label>
                     <DatePicker
                         selectsRange
                         startDate={range[0]}
@@ -100,30 +100,6 @@ export default function SimulationHistory() {
                         dateFormat="dd/MM/yyyy"
                         placeholderText="Selecione um período"
                     />
-                    {/*<div className="flex gap-1 mt-1 text-xs">
-                        <button
-                            className="underline text-secondary"
-                            onClick={() => setRange([startOfDay(new Date()), endOfDay(new Date())])}
-                        >
-                            Hoje
-                        </button>
-                        <span>|</span>
-                        <button
-                            className="underline text-secondary"
-                            onClick={() =>
-                                setRange([startOfWeek(new Date(), { weekStartsOn: 1 }), endOfWeek(new Date(), { weekStartsOn: 1 })])
-                            }
-                        >
-                            Esta semana
-                        </button>
-                        <span>|</span>
-                        <button
-                            className="underline text-secondary"
-                            onClick={() => setRange([startOfMonth(new Date()), endOfMonth(new Date())])}
-                        >
-                            Este mês
-                        </button>
-                    </div>*/}
                 </div>
 
                 {/* Valor */}
@@ -146,17 +122,14 @@ export default function SimulationHistory() {
                     className="w-24"
                 />
 
-                {/* Limpar */}
                 <button
                     onClick={() => {
                         setRange([null, null]);
                         setValor('');
                         setParcelas('');
                     }}
-                    className="ml-auto text-sm underline text-red-600"
-                >
-                    Limpar filtros
-                </button>
+                    className="text-sm underline text-blue-600 w-full sm:w-auto whitespace-nowrap"
+                >Limpar filtros</button>
             </div>
 
             {/* -------- tabela -------- */}

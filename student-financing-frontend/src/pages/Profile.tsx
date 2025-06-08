@@ -72,20 +72,20 @@ export default function Profile() {
     return (
         <div className="max-w-4xl mx-auto space-y-10 py-8 px-4">
             {/* ---------- Header ---------- */}
-            <div className="flex items-center justify-between bg-surface p-6 rounded-2xl shadow-lg">
-                <div className="flex items-center gap-6">
+            <div className="flex flex-col sm:flex-row items-center justify-between bg-surface p-4 sm:p-6 rounded-2xl shadow-lg gap-4 sm:gap-0">
+                <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left">
                     <div className="relative">
                         <img
                             src={avatar}
                             alt="Foto de perfil"
-                            className="h-24 w-24 rounded-full object-cover ring-4 ring-primary/20"
+                            className="h-20 w-20 sm:h-24 sm:w-24 rounded-full object-cover ring-4 ring-primary/20"
                         />
                         <div className="absolute -bottom-1 -right-1 bg-primary text-white p-1.5 rounded-full">
                             <PencilSquareIcon className="h-4 w-4" />
                         </div>
                     </div>
                     <div>
-                        <h1 className="text-3xl font-bold text-gray-800">
+                        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
                             {user.nome} {user.sobrenome}
                         </h1>
                         <p className="text-gray-500 mt-1">{user.email}</p>
@@ -94,6 +94,7 @@ export default function Profile() {
                 <PrimaryButton
                     onClick={() => setOpen(true)}
                     icon={<PencilSquareIcon className="h-5 w-5" />}
+                    className="w-full sm:w-auto"
                 >
                     Editar Perfil
                 </PrimaryButton>
