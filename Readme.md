@@ -4,7 +4,7 @@ Este é um projeto full-stack que conecta estudantes de medicina a financiamento
 
 ## 🎥 Demonstração
 
-https://github.com/seu-usuario/Alume/assets/seu-usuario/video.mkv
+https://github.com/CarlosESRosa/student-financing/blob/main/video.mkv
 
 ## 🚀 Tecnologias Utilizadas
 
