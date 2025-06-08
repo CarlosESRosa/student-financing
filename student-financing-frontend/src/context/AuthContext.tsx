@@ -84,6 +84,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         dispatch({ type: 'BOOTSTRAP_START' });
         try {
             const { data: user } = await api.get<User>('/me');
+            api.defaults.headers.common.Authorization = `Bearer ${token}`;
             dispatch({ type: 'BOOTSTRAP_SUCCESS', payload: { user, token } });
         } catch {
             persist(null);

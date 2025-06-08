@@ -1,4 +1,5 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import {
     LineChart,
@@ -11,12 +12,13 @@ import {
 import { fetchSimulations, type Simulation } from '../services/simulation';
 import { toBRL, toNum } from '../utils/number';
 
-/* --- style helpers --- */
+/* --- helpers de estilo --- */
 const Card = styled.div.attrs({
     className: 'bg-surface rounded-xl shadow p-6 flex flex-col gap-2',
 })``;
 
 export default function DashboardHome() {
+    const navigate = useNavigate();
     const [data, setData] = useState<Simulation[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -24,12 +26,18 @@ export default function DashboardHome() {
     useEffect(() => {
         (async () => {
             setLoading(true);
-            const sims = await fetchSimulations();
-            setData(sims);
-            setLoading(false);
+            try {
+                const sims = await fetchSimulations();
+                setData(sims);
+            } catch {
+                setData([]);          // 404 ou erro ⇒ lista vazia
+            } finally {
+                setLoading(false);
+            }
         })();
     }, []);
 
+    /* ------------ calculos e UI normal (já existentes) ------------ */
     /* últimas 5 */
     const recent = useMemo(
         () =>
@@ -41,19 +49,16 @@ export default function DashboardHome() {
         [data],
     );
 
-    /* totalizadores */
     const total = data.length;
-    const mediaParcelas = useMemo(() => {
-        if (!data.length) return 0;
-        return (
-            data.reduce(
-                (acc, cur) => acc + toNum(cur.valor_parcela_mensal),
-                0,
-            ) / data.length
-        );
-    }, [data]);
+    const mediaParcelas = useMemo(
+        () =>
+            data.length
+                ? data.reduce((acc, cur) => acc + toNum(cur.valor_parcela_mensal), 0) /
+                data.length
+                : 0,
+        [data],
+    );
 
-    /* dados p/ gráfico */
     const chartData = useMemo(
         () =>
             [...data]
@@ -67,9 +72,24 @@ export default function DashboardHome() {
         [data],
     );
 
-    /* --- UI --- */
-    if (loading)
-        return <p className="text-center py-10">Carregando dashboard…</p>;
+    /* carregando */
+    if (loading) return <p className="text-center py-10">Carregando dashboard…</p>;
+
+    if (total === 0) {
+        return (
+            <div className="flex flex-col items-center justify-center py-20 text-center gap-6">
+                <h1 className="text-2xl font-semibold">
+                    Você ainda não fez nenhuma simulação
+                </h1>
+                <button
+                    onClick={() => navigate('/nova-simulacao')}
+                    className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg"
+                >
+                    Criar nova simulação
+                </button>
+            </div>
+        );
+    }
 
     return (
         <div className="space-y-8">

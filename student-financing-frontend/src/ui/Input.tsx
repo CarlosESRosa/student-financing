@@ -7,15 +7,17 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
     error?: string;
     register?: UseFormRegisterReturn;
     icon?: ReactNode;
+    required?: boolean;
 };
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ className = '', label, error, register, icon, ...props }, ref) => {
+    ({ className = '', label, error, register, icon, required, ...props }, ref) => {
         return (
             <div className="space-y-1">
                 {label && (
                     <label className="block text-sm font-medium text-gray-700">
                         {label}
+                        {required && <span className="text-error ml-1">*</span>}
                     </label>
                 )}
                 <div className="relative">
@@ -35,6 +37,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                             ${icon ? 'pl-10' : ''}
                             ${className}
                         `}
+                        required={required}
                         {...register}
                         {...props}
                     />

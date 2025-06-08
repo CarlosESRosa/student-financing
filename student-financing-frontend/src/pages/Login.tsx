@@ -41,6 +41,7 @@ export default function Login() {
                         placeholder="seu@email.com"
                         register={register('email')}
                         error={errors.email?.message}
+                        required
                     />
 
                     <Input
@@ -49,6 +50,7 @@ export default function Login() {
                         placeholder="••••••••"
                         register={register('senha')}
                         error={errors.senha?.message}
+                        required
                     />
 
                     <PrimaryButton

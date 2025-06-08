@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+
 import Input from '../ui/Input';
 import { PrimaryButton } from '../ui/PrimaryButton';
 import {
@@ -14,6 +15,7 @@ export default function SimulationForm() {
     const navigate = useNavigate();
 
     const {
+        control,
         register,
         handleSubmit,
         watch,
@@ -45,7 +47,7 @@ export default function SimulationForm() {
     const onSubmit = async (data: SimulationFormData) => {
         try {
             await createSimulation(data);
-            reset();              // limpa formulário
+            reset();               // limpa formulário
             navigate('/historico');
         } catch {
             alert('Erro ao salvar simulação');
@@ -60,18 +62,40 @@ export default function SimulationForm() {
                 </h1>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                    {/* Valor total */}
-                    <Input
-                        label="Valor total (R$)"
-                        type="number"
-                        min={0}
-                        step="0.01"
-                        placeholder="Ex.: 25 000"
-                        register={register('valor_total', { valueAsNumber: true })}
-                        error={errors.valor_total?.message}
+                    {/* ---------------- Valor total com máscara ---------------- */}
+                    <Controller
+                        name="valor_total"
+                        control={control}
+                        rules={{ required: 'Informe um valor' }}
+                        render={({ field }) => (
+                            <Input
+                                label="Valor total (R$)"
+                                type="text"
+                                placeholder="Ex.: 10.000,00"
+                                /* exibe o valor formatado */
+                                value={
+                                    field.value === undefined
+                                        ? ''
+                                        : field.value.toLocaleString('pt-BR', {
+                                            minimumFractionDigits: 2,
+                                            maximumFractionDigits: 2,
+                                        })
+                                }
+                                /* converte digitação → número */
+                                onChange={e => {
+                                    const onlyDigits = e.target.value.replace(/\D/g, ''); // só dígitos
+                                    if (!onlyDigits) return field.onChange(undefined);
+
+                                    const numeric = Number(onlyDigits) / 100; // 12345 -> 123,45
+                                    field.onChange(numeric);
+                                }}
+                                onBlur={field.onBlur}
+                                ref={field.ref}
+                                error={errors.valor_total?.message}
+                            />
+                        )}
                     />
 
-                    {/* Parcelas */}
                     <Input
                         label="Quantidade de parcelas"
                         type="number"
@@ -81,7 +105,6 @@ export default function SimulationForm() {
                         error={errors.quantidade_parcelas?.message}
                     />
 
-                    {/* Juros */}
                     <Input
                         label="Juros ao mês (%)"
                         type="number"
@@ -92,9 +115,9 @@ export default function SimulationForm() {
                         error={errors.juros_ao_mes?.message}
                     />
 
-                    {/* Parcela calculada */}
                     <div className="text-center text-lg font-medium bg-primary/5 py-2 rounded-lg">
-                        Parcela mensal: <span className="text-primary">{parcelaCalculada}</span>
+                        Parcela mensal:{' '}
+                        <span className="text-primary">{parcelaCalculada}</span>
                     </div>
 
                     <PrimaryButton

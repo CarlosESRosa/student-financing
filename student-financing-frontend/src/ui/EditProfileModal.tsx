@@ -1,10 +1,11 @@
 import { type ReactNode } from 'react';
 import styled from 'styled-components';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import { createPortal } from 'react-dom';
 
 const Backdrop = styled.div.attrs({
     className:
-        'fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-40 transition-opacity duration-300',
+        'fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-max transition-opacity duration-300',
 })``;
 
 const Dialog = styled.div.attrs({
@@ -22,7 +23,7 @@ type ModalProps = {
 export default function EditProfileModal({ isOpen, onClose, title, children }: ModalProps) {
     if (!isOpen) return null;
 
-    return (
+    return createPortal(
         <Backdrop>
             <Dialog>
                 <div className="flex items-center justify-between mb-6">
@@ -38,6 +39,7 @@ export default function EditProfileModal({ isOpen, onClose, title, children }: M
                 </div>
                 {children}
             </Dialog>
-        </Backdrop>
+        </Backdrop>,
+        document.body
     );
 }

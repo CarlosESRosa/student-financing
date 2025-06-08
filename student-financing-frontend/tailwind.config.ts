@@ -10,6 +10,7 @@ export default {
         bg: 'rgb(var(--c-bg) / <alpha-value>)',
         surface: 'rgb(var(--c-surface) / <alpha-value>)',
         text: 'rgb(var(--c-text) / <alpha-value>)',
+        error: '#ef4444',
       },
     },
   },

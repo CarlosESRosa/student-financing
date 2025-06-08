@@ -40,6 +40,7 @@ export default function Register() {
                         placeholder="Seu nome"
                         register={register('nome')}
                         error={errors.nome?.message}
+                        required
                     />
 
                     <Input
@@ -47,6 +48,7 @@ export default function Register() {
                         placeholder="Seu sobrenome"
                         register={register('sobrenome')}
                         error={errors.sobrenome?.message}
+                        required
                     />
 
                     <Input
@@ -55,6 +57,7 @@ export default function Register() {
                         placeholder="seu@email.com"
                         register={register('email')}
                         error={errors.email?.message}
+                        required
                     />
 
                     <Input
@@ -63,6 +66,7 @@ export default function Register() {
                         placeholder="••••••••"
                         register={register('senha')}
                         error={errors.senha?.message}
+                        required
                     />
 
                     <Input
@@ -71,6 +75,7 @@ export default function Register() {
                         placeholder="••••••••"
                         register={register('confirmarSenha')}
                         error={errors.confirmarSenha?.message}
+                        required
                     />
 
                     <PrimaryButton
