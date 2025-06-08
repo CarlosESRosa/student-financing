@@ -28,9 +28,9 @@ collection:
           mimeType: application/json
           text: |-
             {
-              "nome": "Ana222",
-              "sobrenome": "Clara",
-              "email": "ana22@example.com",
+              "nome": "carlos",
+              "sobrenome": "Rosa",
+              "email": "carlosrosa@example.com",
               "senha": "123456"
             }
         headers:
@@ -61,7 +61,7 @@ collection:
           mimeType: application/json
           text: |-
             {
-            		"email": "teste@email.com",
+            		"email": "carlosrosa@example.com",
               "senha": "123456"
             }
         headers:
@@ -119,7 +119,7 @@ collection:
           mimeType: application/json
           text: |-
             {
-              "nome": "Ana 1111"
+              "nome": "carlos 1111"
             }
         headers:
           - name: Authorization
