@@ -14,10 +14,14 @@ COPY . .
 # Build TypeScript
 RUN npm run build
 
+# Remove development dependencies
+RUN npm prune --production
+
 # Verify build output
 RUN ls -la dist/
 
 # Start the application
 EXPOSE 3000
 
-CMD ["node", "dist/index.js"] 
+# Use a shell form to allow environment variable substitution
+CMD node dist/index.js 
