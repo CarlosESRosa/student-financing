@@ -1,0 +1,247 @@
+type: collection.insomnia.rest/5.0
+name: Student Financing API
+meta:
+  id: wrk_dc95f96201d046e6baa02a17be16da25
+  created: 1749043952457
+  modified: 1749043952457
+  description: ""
+collection:
+  - name: Student
+    meta:
+      id: fld_5b2ab15de9854edca9de4102db1b046a
+      created: 1749048945932
+      modified: 1749048945932
+      sortKey: -1749048945932
+      description: ""
+    children:
+      - url: "{{ base_url }}/register"
+        name: Register Student
+        meta:
+          id: req_dfaeffa4326041dc8109f6172e807808
+          created: 1749043952459
+          modified: 1749264809366
+          isPrivate: false
+          description: ""
+          sortKey: -1749048950970
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Ana222",
+              "sobrenome": "Clara",
+              "email": "ana22@example.com",
+              "senha": "123456"
+            }
+        headers:
+          - id: pair_85e2f303153b48b499503966313aa56d
+            name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/login"
+        name: Login
+        meta:
+          id: req_5268fc1873f04fa4be21e9816e7fa59a
+          created: 1749043952460
+          modified: 1749317701060
+          isPrivate: false
+          description: ""
+          sortKey: -1749048951070
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            		"email": "teste@email.com",
+              "senha": "123456"
+            }
+        headers:
+          - id: pair_ce13ea8ee43f425f82fe9a5298a76749
+            name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/me"
+        name: Get My Data
+        meta:
+          id: req_8a647cb03d32415bb9cf64a908b1cfc3
+          created: 1749043952460
+          modified: 1749230671552
+          isPrivate: false
+          description: ""
+          sortKey: -1749048950870
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.jwt }}
+            id: pair_a43a6e0b86c8480989116c076e3fda82
+          - id: pair_62f43e6d23aa4ba9b32edd60413493a6
+            name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/me"
+        name: Update My Data
+        meta:
+          id: req_64202bd39f70476788dac0b34792861f
+          created: 1749043952461
+          modified: 1749192100518
+          isPrivate: false
+          description: ""
+          sortKey: -1749048950920
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Ana 1111"
+            }
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.jwt }}
+            id: pair_0bdff69c56fe4e8d90bdd021bdf00797
+          - id: pair_9749dee4b4574de0a528c101a9f1bc84
+            name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Simulation
+    meta:
+      id: fld_c0a24c5a12f1468a882fffdc277431cb
+      created: 1749049024546
+      modified: 1749049024546
+      sortKey: -1749049024546
+      description: ""
+    children:
+      - url: "{{ base_url }}/simulations"
+        name: Create Simulation
+        meta:
+          id: req_250c33bcefde4f2fa0e3de4035ece9c5
+          created: 1749043952462
+          modified: 1749315148101
+          isPrivate: false
+          description: ""
+          sortKey: -1749049027516
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+                "valor_total": 50000,
+                "quantidade_parcelas": 12,
+                "juros_ao_mes": 3
+            }
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.jwt }}
+            id: pair_4f362cbff3404767b910ac60384dac1e
+          - id: pair_700e4288462a4bc6b206433bb0396726
+            name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/simulations"
+        name: List My Simulations
+        meta:
+          id: req_64bdc8468abb4ac195a90aaf4ab60d56
+          created: 1749043952463
+          modified: 1749182002316
+          isPrivate: false
+          description: ""
+          sortKey: -1749049027616
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.jwt }}
+            id: pair_1337214e2678449cb8ec6046b80ee899
+          - id: pair_040d5e1a2b884e5b9a35a002ef024011
+            name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - url: http://localhost:3000/health
+    name: New Request
+    meta:
+      id: req_52a1cc5d2c474a98871e05d2b7e95a3b
+      created: 1749172804128
+      modified: 1749172808380
+      isPrivate: false
+      description: ""
+      sortKey: -1749172804128
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.2.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_578a13c25f89fae998c97f2c72310a4fed07b1a6
+    created: 1749043952464
+    modified: 1749043952464
+environments:
+  name: Base Environment
+  meta:
+    id: env_59d193968f644999b16df65830eb7e8c
+    created: 1749043952458
+    modified: 1749315113853
+    isPrivate: false
+  data:
+    base_url: http://localhost:3000/api
+    jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiOiJ0ZXN0ZUBlbWFpbC5jb20iLCJpYXQiOjE3NDkzMTUxMDQsImV4cCI6MTc0OTMxNTQwNH0.UotyJU11W6ct4PtmvQ8wl7gBaoDswIWyfYkDGrENNHQ

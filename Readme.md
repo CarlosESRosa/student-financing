@@ -1,6 +1,10 @@
-# Alume - Sistema de Financiamentos Estudantis
+# Sistema de Financiamentos Estudantis
 
-Este é um projeto full-stack desenvolvido para a Alume, uma startup que conecta estudantes de medicina a financiamentos estudantis personalizados. O sistema permite que estudantes se cadastrem e simulem financiamentos.
+Este é um projeto full-stack que conecta estudantes de medicina a financiamentos estudantis personalizados. O sistema permite que estudantes se cadastrem e simulem financiamentos.
+
+## 🎥 Demonstração
+
+https://github.com/seu-usuario/Alume/assets/seu-usuario/video.mkv
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -68,15 +72,15 @@ npm run dev
 ### Backend
 
 1. Certifique-se de ter o PostgreSQL instalado e rodando localmente
-2. Configure as seguintes variáveis de ambiente no backend:
-   - DB_HOST=localhost
+2. Configure as seguintes variáveis de ambiente no backend (tem um arquivo .env.example, basta trocar o nome para .env):
+   - DB_HOST=postgres
    - DB_PORT=5432
-   - DB_NAME=meubanco
    - DB_USER=meuusuario
    - DB_PASS=minhasenha
-   - NODE_ENV=development
+   - DB_NAME=meubanco
    - JWT_SECRET=umaChaveSecretaMuitoForte123!
    - JWT_EXPIRES_IN=5m
+   - PORT=3000
 
 3. Execute o backend:
 ```bash
@@ -99,13 +103,14 @@ npm run dev
 ### Autenticação
 - `POST /api/register` - Cadastro de novo estudante
 - `POST /api/login` - Login
-- `POST /api/me` - Dados do estudante autenticado
+- `GET /api/me` - Dados do estudante autenticado
 - `PUT /api/me` - Atualização de dados do estudante
 
 ### Simulações (Requer autenticação)
 - `POST /api/simulations` - Criar nova simulação
 - `GET /api/simulations` - Listar simulações do estudante
 
+No Backend tem um arquivo Insomnia_2025-06-08.yaml que pode ser importado no seu insomnia e já vai ter exemplo de todas requisições.
 ## 🖥️ Acessando a Aplicação
 
 - Frontend: http://localhost:5173 (ou a porta que o Vite indicar)
