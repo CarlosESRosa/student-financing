@@ -154,7 +154,7 @@ npm run dev
    - Verifique se as URLs de API no frontend estão corretas
    - Verifique se o token JWT está sendo enviado corretamente
 
-## 📝 Notas Adicionais
+## 📝 Notas Adicionais 
 
 - Todas as senhas são criptografadas antes de serem armazenadas
 - O token JWT expira em 5 minutos por questões de segurança
