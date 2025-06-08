@@ -15,13 +15,13 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   node:
-    build: ./student-financing-backend2
+    build: .
     container_name: meu_node
     restart: always
     ports:
       - "3000:3000"
     volumes:
-      - ./student-financing-backend2:/usr/src/app
+      - .:/usr/src/app
       - /usr/src/app/node_modules
     depends_on:
       - postgres
