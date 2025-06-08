@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useAuth } from '../context/AuthContext'; // ⚠️ só para typings
 
 export const api = axios.create({
     baseURL: 'http://localhost:3000/api',

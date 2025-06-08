@@ -8,9 +8,8 @@ import {
     Tooltip,
     ResponsiveContainer,
 } from 'recharts';
-import { fetchSimulations, Simulation } from '../services/simulation';
+import { fetchSimulations, type Simulation } from '../services/simulation';
 import { toBRL, toNum } from '../utils/number';
-import { calcPMT } from '../utils/price';
 
 /* --- style helpers --- */
 const Card = styled.div.attrs({

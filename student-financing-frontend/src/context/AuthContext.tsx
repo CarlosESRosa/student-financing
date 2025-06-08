@@ -4,7 +4,7 @@ import {
     useContext,
     useEffect,
     useCallback,
-    ReactNode,
+    type ReactNode,
 } from 'react';
 import { api } from '../services/api';
 

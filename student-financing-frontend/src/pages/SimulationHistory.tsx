@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
-import { addDays, endOfMonth, startOfMonth, startOfWeek, endOfWeek, startOfDay, endOfDay } from 'date-fns';
+import { /* addDays, endOfMonth, startOfMonth, startOfWeek, endOfWeek,*/ startOfDay, endOfDay, isWithinInterval } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css'; // necessário para funcionamento interno
-import { fetchSimulations, Simulation } from '../services/simulation';
+import { fetchSimulations, type Simulation } from '../services/simulation';
 import Pagination from '../ui/Pagination';
 import Input from '../ui/Input';
 
@@ -50,11 +50,13 @@ export default function SimulationHistory() {
         let res = data;
 
         /* data */
-        if (range[0] && range[1]) {
-            const [start, end] = range;
+        if (range[0]) {
+            const filterStart = startOfDay(range[0]);
+            const filterEnd = range[1] ? endOfDay(range[1]) : endOfDay(range[0]);
+
             res = res.filter(s => {
-                const d = new Date(s.createdAt);
-                return d >= start! && d <= end!;
+                const simulationDate = new Date(s.createdAt);
+                return isWithinInterval(simulationDate, { start: filterStart, end: filterEnd });
             });
         }
 
