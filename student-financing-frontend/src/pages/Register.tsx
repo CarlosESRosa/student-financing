@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Input from '../ui/Input';
 import { PrimaryButton } from '../ui/PrimaryButton';
 import { registerSchema, type RegisterFormData } from '../schemas/auth';
+import { showAlert } from '../utils/alert';
 
 export default function Register() {
     const { register: registerUser } = useAuth();
@@ -23,7 +24,11 @@ export default function Register() {
             await registerUser(data.nome, data.sobrenome, data.email, data.senha);
             navigate('/home');
         } catch (error) {
-            alert('Erro ao criar conta');
+            showAlert({
+                title: 'Erro ao criar conta',
+                text: 'Não foi possível criar sua conta. Tente novamente mais tarde.',
+                icon: 'error',
+            });
         }
     };
 

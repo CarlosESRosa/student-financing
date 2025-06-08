@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Input from '../ui/Input';
 import { PrimaryButton } from '../ui/PrimaryButton';
 import { loginSchema, type LoginFormData } from '../schemas/auth';
+import { showAlert } from '../utils/alert';
 
 export default function Login() {
     const { login } = useAuth();
@@ -23,7 +24,11 @@ export default function Login() {
             await login(data.email, data.senha);
             navigate('/home');
         } catch (error) {
-            alert('Credenciais inválidas');
+            showAlert({
+                title: 'Erro ao entrar',
+                text: 'Credenciais inválidas. Verifique seu e-mail e senha.',
+                icon: 'error',
+            });
         }
     };
 

@@ -11,6 +11,7 @@ import { PrimaryButton } from '../ui/PrimaryButton';
 import { CancelButton } from '../ui/CancelButton';
 import { profileSchema, type ProfileFormData } from '../schemas/auth';
 import avatar from '../assets/profile.jpg';           // imagem fixa
+import { showAlert } from '../utils/alert';
 
 /* ------ styled wrappers (Tailwind via className) ----------------------- */
 const Card = styled.section.attrs({
@@ -54,7 +55,11 @@ export default function Profile() {
             setUser(res.data.data);
             setOpen(false);
         } catch (error) {
-            alert('Erro ao atualizar perfil');
+            showAlert({
+                title: 'Erro ao atualizar perfil',
+                text: 'Não foi possível atualizar seu perfil. Tente novamente mais tarde.',
+                icon: 'error',
+            });
         }
     };
 
